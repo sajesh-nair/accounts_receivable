@@ -1,0 +1,14 @@
+# Python virtual environments & cache
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Node modules & React build
+node_modules/
+dist/
+.env
+
+# Model artifacts if too large (optional)
+# *.pkl
+# *.joblib
