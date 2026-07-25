@@ -29,7 +29,7 @@ export default function App() {
 
   // Fetch Real Data from FastAPI
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/ledger')
+    fetch('https://accounts-receivable-s4wd.onrender.com/api/ledger')
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
