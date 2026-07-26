@@ -2,8 +2,8 @@
 
 An end-to-end predictive analytics dashboard built to help finance teams monitor cash flow and reduce credit default risk. Using a two-stage machine learning pipeline, the application evaluates invoice payment delays, estimates overall financial exposure, and helps prioritize collections.
 
-* Live Dashboard: https://accounts-receivable-ml.vercel.app
-* Backend API: https://accounts-receivable-s4wd.onrender.com
+* Live Dashboard: [https://accounts-receivable-ml.vercel.app](https://accounts-receivable-ml.vercel.app)
+* Backend API: [https://accounts-receivable-s4wd.onrender.com](https://accounts-receivable-s4wd.onrender.com)
 
 ---
 
@@ -56,18 +56,19 @@ flowchart TB
     FastAPI --> KPI
     FastAPI --> Sim
     FastAPI --> Ledger
+```
 
-
+---
 
 ## What It Does
 
-* Executive Overview: Tracks total outstanding balance, predicted default risk, average risk scores, and total active invoices.
-* Two-Stage ML Model:
-  * Classification: Calculates the likelihood of an invoice being paid late or defaulting.
-  * Regression: Predicts the exact number of days payment will be delayed and the resulting financial impact.
-* What-If Simulator: Allows users to adjust payment terms, credit limits, and delay parameters to test different risk scenarios in real time.
-* Collections Ledger: Automatically sorts accounts by risk level and value so collectors know which clients to contact first.
-* REST API Integration: Connects a React frontend with a FastAPI backend service for quick data fetching and inference.
+* **Executive Overview:** Tracks total outstanding balance, predicted default risk, average risk scores, and total active invoices.
+* **Two-Stage ML Model:**
+  * **Classification:** Calculates the likelihood of an invoice being paid late or defaulting.
+  * **Regression:** Predicts the exact number of days payment will be delayed and the resulting financial impact.
+* **What-If Simulator:** Allows users to adjust payment terms, credit limits, and delay parameters to test different risk scenarios in real time.
+* **Collections Ledger:** Automatically sorts accounts by risk level and value so collectors know which clients to contact first.
+* **REST API Integration:** Connects a React frontend with a FastAPI backend service for quick data fetching and inference.
 
 ---
 
@@ -86,28 +87,6 @@ flowchart TB
 
 ---
 
-## System Architecture
-+-------------------------------+
-|     React + Vite Frontend     |
-|       (Hosted on Vercel)      |
-+---------------+---------------+
-|
-| REST API
-v
-+-------------------------------+
-|       FastAPI Backend         |
-|       (Hosted on Render)      |
-+---------------+---------------+
-|
-| Model Inference
-v
-+-------------------------------+
-|   Scikit-Learn ML Models      |
-|  (Classification + Regression)|
-+-------------------------------+
-
----
-
 ## Local Development Setup
 
 ### Prerequisites
@@ -119,10 +98,12 @@ v
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/sajesh-nair/accounts_receivable.git](https://github.com/sajesh-nair/accounts_receivable.git)
+git clone https://github.com/sajesh-nair/accounts_receivable.git
 cd accounts_receivable
+```
 
-2. Backend Setup
+### 2. Backend Setup
+```bash
 cd backend
 
 # Create and activate environment
@@ -139,9 +120,11 @@ pip install -r requirements.txt
 
 # Run server
 uvicorn main:app --reload
-The API will run locally at http://localhost:8000.
+```
+The API will run locally at `http://localhost:8000`.
 
-3. Frontend Setup
+### 3. Frontend Setup
+```bash
 # Open a new terminal tab/window
 cd frontend
 
@@ -150,4 +133,5 @@ npm install
 
 # Start dev server
 npm run dev
-Open http://localhost:5173 in your browser.
+```
+Open `http://localhost:5173` in your browser.
