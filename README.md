@@ -7,6 +7,58 @@ An end-to-end predictive analytics dashboard built to help finance teams monitor
 
 ---
 
+## Architecture Flow
+
+```mermaid
+flowchart TB
+    subgraph TopRow [" "]
+        direction LR
+        
+        subgraph API ["Backend Service (Render)"]
+            FastAPI["Python FastAPI Service"]
+        end
+
+        subgraph Client ["Frontend (Vercel)"]
+            direction TB
+            UI["React + Vite + Tailwind CSS"]
+            
+            subgraph Dashboards ["Dashboards"]
+                direction LR
+                KPI["Executive KPI Dashboard"]
+                Sim["What-If Simulator"]
+                Ledger["Priority Action Ledger"]
+            end
+            UI ~~~ Dashboards
+        end
+    end
+
+    subgraph Engine ["2-Stage ML Inference Engine"]
+        Preproc["ColumnTransformer Preprocessing<br/>(SimpleImputer, StandardScaler, OneHotEncoder)"]
+        Stage1["Stage 1: Classification Model<br/>(Random Forest | AUC 0.93)"]
+        Filter{"Is Invoice High Risk?"}
+        
+        Stage2["Stage 2: Continuous Regressor<br/>(HistGradientBoostingRegressor | R² 0.20)"]
+        OnTime["Mark: Low Risk / On-Time"]
+        
+        Outputs["Risk Score & Expected Delay (Days)"]
+
+        Preproc --> Stage1 --> Filter
+        Filter -->|"Yes (Delinquent)"| Stage2
+        Filter -->|"No (Low Risk)"| OnTime
+        Stage2 --> Outputs
+        OnTime --> Outputs
+    end
+
+    UI -->|"Invoice Data / Parameters"| FastAPI
+    FastAPI --> Preproc
+    Outputs -->|"JSON Predictions"| FastAPI
+    
+    FastAPI --> KPI
+    FastAPI --> Sim
+    FastAPI --> Ledger
+
+
+
 ## What It Does
 
 * Executive Overview: Tracks total outstanding balance, predicted default risk, average risk scores, and total active invoices.
