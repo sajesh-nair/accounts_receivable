@@ -6,7 +6,6 @@ An end-to-end predictive analytics dashboard built to help finance teams monitor
 * Backend API: [https://accounts-receivable-s4wd.onrender.com](https://accounts-receivable-s4wd.onrender.com)
 
 ---
-
 ## Architecture Flow
 
 ```mermaid
@@ -23,12 +22,12 @@ flowchart TD
     end
 
     subgraph Engine ["2-Stage ML Inference Engine"]
-        Preproc["ColumnTransformer Preprocessing<br/>(SimpleImputer, StandardScaler, OneHotEncoder)"]
-        Stage1["Stage 1: Classification Model<br/>(Random Forest | AUC 0.93)"]
-        Filter{"Is Invoice High Risk?"}
-        Stage2["Stage 2: Continuous Regressor<br/>(HistGradientBoostingRegressor | R² 0.20)"]
+        Preproc["ColumnTransformer Preprocessing<br/>SimpleImputer | StandardScaler | OneHotEncoder"]
+        Stage1["Stage 1: Classification Model<br/>Random Forest | AUC 0.93"]
+        Filter{"Is Invoice<br/>High Risk?"}
+        Stage2["Stage 2: Continuous Regressor<br/>HistGradientBoostingRegressor | R² 0.20"]
         OnTime["Mark: Low Risk / On-Time"]
-        Outputs["Risk Score & Expected Delay (Days)"]
+        Outputs["Risk Score & Expected Delay<br/>(Days)"]
     end
 
     UI -->|"Invoice Data / Parameters"| FastAPI
